@@ -77,7 +77,6 @@ int countNodes(node* head){
 }
 
 //convert the linkedlist to an array
-
 int* create_array(node* head){
     
     int* arr = (int*)malloc( countNodes(head) * sizeof(int) );
@@ -95,4 +94,27 @@ int* create_array(node* head){
     return arr;
 }
 
+// delete an array by its value
+
+void deleteNode(node* head, int valueToDelete){
+    node* ptr = head;
+     
+    // this pointer will memorise the last node's
+    // memory address before passing to a new node.
+    node* prev = NULL;
+
+    while (ptr->next != NULL && ptr->value != valueToDelete){
+        prev = ptr;
+        ptr = ptr->next;
+    }
+
+    if(ptr->next != NULL){
+        prev->next = ptr->next;
+        ptr->next = NULL;
+    }
+    else{
+        prev->next = NULL;
+    }
+    free(ptr);
+}
 #endif
